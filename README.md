@@ -1,6 +1,6 @@
 # be-hashing-out
 
-*be-hahing-out* can't help but long for the the brevity and sorcery on [display here](https://www.w3schools.com/TAGs/tag_output.asp):
+*be-hashing-out* can't help but long for the the brevity and sorcery on [display here](https://www.w3schools.com/TAGs/tag_output.asp):
 
 ```html
 <form oninput="result.value=parseInt(a.value)+parseInt(b.value)">
