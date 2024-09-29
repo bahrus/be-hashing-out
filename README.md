@@ -33,6 +33,24 @@ as=html shadow=open ></fetch-for>
 
 In this case, say the value is:  63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228
 
-Suppose the (ShadowDOM) root node got assigned a GUID (private key) that can only be read by already permissioned  JavaScript. 
+### Step 2
 
-In order to activate the script (in this case, compile the event handler), this library needs to read that private key, which can only be done if JavaScript is activated.  The element with the inline script has to have: 1)  an id and 2) an attribute -- hash-ish ? that is the digest of the id.  If and only if that passes does the inline script get compiled. 
+```html
+<script type=module>
+    import {register} from 'be-hashing-out/register.js';
+    register('63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228');
+</script>
+
+<fetch-for be-hashing-out=63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228
+href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/ 
+as=html shadow=open ></fetch-for>
+```
+
+What *be-hashing-out* does:
+
+1.  Gets the OuterHTML string of the element it adorns.
+2.  Removes the "=63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228" part out of the stirng.
+3.  Calculates the digest.
+4.  Verifies that the value was registered.
+5.  Sets property oFetchFor.beHashingOut.isRegistered to true if the digests match, otherwise false.
+6.  If false, emits a console error again.
