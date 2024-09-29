@@ -21,6 +21,18 @@
 
  ## Security concerns - Nonce in userland?
 
+ ### Step 1
+
+ ```html
+ <fetch-for be-hashing-out
+href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/ 
+as=html shadow=open ></fetch-for>
+ ```
+
+ What this does:  Since the value of the attribute is empty, it emits an error with the Crypto.subtle.digest value based on the outerHTML (including the be-hashing-out attribute) to the console.
+
+In this case, say the value is:  63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228
+
 Suppose the (ShadowDOM) root node got assigned a GUID (private key) that can only be read by already permissioned  JavaScript. 
 
 In order to activate the script (in this case, compile the event handler), this library needs to read that private key, which can only be done if JavaScript is activated.  The element with the inline script has to have: 1)  an id and 2) an attribute -- hash-ish ? that is the digest of the id.  If and only if that passes does the inline script get compiled. 
