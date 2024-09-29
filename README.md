@@ -1,5 +1,9 @@
 # be-hashing-out
 
+## The catch-22 of web development
+
+>  Enabling unfettered JavaScript unintentionally in the browser can be dangerous, as it allows XSS attacks.  Therefore, (in addition to performance and accessibility reasons), use less JavaScript, more HTML.  However, if the HTML contains any explicit JavaScript in the event handlers, you're back to square one since the browser won't support you with nonce/hash, and script tags can't identify where in the DOM it is.  So.... just give up and write the whole thing in JavaScript.
+
 *be-hashing-out* can't help but long for the the brevity and sorcery on [display here](https://www.w3schools.com/TAGs/tag_output.asp):
 
 ```html
