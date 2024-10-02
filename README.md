@@ -15,7 +15,7 @@
 ```
 
 
- formerly also on MDN, but MDN abandoned simplicity for seemingly nonce-sensical security reasons (perhaps I'm wrong, thinking this out, which is what this repo is currently).
+ This example was also formerly shared with MDN, but MDN abandoned simplicity for seemingly nonce-sensical security reasons (perhaps I'm wrong, thinking this out, which is what this repo is currently).
 
  Due to a lack of -- I'm not sure what -- the platform engineers have apparently failed to find a way to support brevity like this, even for trusted content coming from the host -- i.e. most "minimal" security measures throw the baby out with the bathwater, blocking our ability to do this (sigh).  How could they have supported it?  I *think* by allowing the nonce / hash attribute to apply to the parent element that contains inline scripts.  Maybe that was looked at and found problematic, who knows?  All I know is it is deeply unfortunate, and it appears to be resulting in solutions adopting makeshift handler syntax that is probably just as vulnerable to similar attacks as the native inline handlers are, only reduced by lack of widespread adoption.  And not solving this problem appears to me to driving a stake through the idea of progressive enhancement.
 
@@ -29,7 +29,7 @@ href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/
 as=html shadow=open ></fetch-for>
  ```
 
- What this does:  Since the value of the attribute is empty, it emits an error with the Crypto.subtle.digest value based on the outerHTML (excluding the be-hashing-out attribute) to the console.
+What this does:  Since the value of the attribute is empty, it emits an error with the Crypto.subtle.digest value based on the outerHTML (excluding the be-hashing-out attribute) to the console.
 
 In this case, say the value is:  63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228
 
@@ -49,7 +49,7 @@ as=html shadow=open ></fetch-for>
 What *be-hashing-out* does:
 
 1.  Gets the OuterHTML string of the element it adorns.
-2.  Removes the "=63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228" part out of the stirng.
+2.  Removes the "be-hashing-out=63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228" part out of the string.
 3.  Calculates the digest.
 4.  Verifies that the value was registered.
 5.  Sets property oFetchFor.beHashingOut.isRegistered to true if the digests match, otherwise false.
