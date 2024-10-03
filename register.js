@@ -3,7 +3,7 @@
 /**
  * @type Set<string>
  */
-const registry = new Set();
+export const registry = new Set();
 /**
  * 
  * @param {string | Array<string>} hash 
