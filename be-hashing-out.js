@@ -40,10 +40,8 @@ class BeHashingOut extends BE {
      */
     async logDigest(self) {
         const {enhancedElement} = self;
-        const searchStr = be_hashing_out + '"';
-        const outer = enhancedElement.outerHTML.replace(searchStr, '');
-        console.log(outer);
-        const digest = await this.digestMessage(outer);
+        const msg = this.#getVals(enhancedElement.attributes);
+        const digest = await this.digestMessage(msg);
         const suggestedAttr = `${be_hashing_out}${digest}"`
         console.error(String.raw `
             Suggested markup:
@@ -58,6 +56,19 @@ class BeHashingOut extends BE {
             rejected: true
         });
     }
+    /**
+     * 
+     * @param {NamedNodeMap} attrs 
+     */
+    #getVals(attrs){
+        /** @type {Array<string>} */
+        const vals = [];
+        for(const attr of attrs){
+            if(attr.name === 'be-hashing-out') continue;
+            vals.push(`${attr.name}=${attr.value}`);
+        }
+        return vals.join(',');
+    }
 
     /**
      * 
@@ -65,9 +76,8 @@ class BeHashingOut extends BE {
      */
     async checkDigest(self) {
         const {enhancedElement, digest} = self;
-        const outer = enhancedElement.outerHTML.replace(be_hashing_out + digest + '"', "");
-        console.log({outer});
-        const digest2 = await this.digestMessage(outer);
+        const msg = this.#getVals(enhancedElement.attributes);
+        const digest2 = await this.digestMessage(msg);
         if(digest !== digest2 || !registry.has(digest)){
             console.error(`${digest}!==${digest2}`);
             return /** @type {PAP} */({
