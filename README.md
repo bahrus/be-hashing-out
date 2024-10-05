@@ -31,7 +31,7 @@ href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/
 as=html shadow=open ></fetch-for>
  ```
 
-What this does:  Since the value of the attribute is empty, it emits an error with the SubtleCrypto.digest value based on the outerHTML (excluding the be-hashing-out attribute) to the console.
+What this does:  Since the value of the attribute is empty, it emits an error with the SubtleCrypto.digest value based on the attribute values (excluding the be-hashing-out attribute) to the console.
 
 In this case, say the value is:  7f1a1863445afcd5051f89bbb92b5bfe580e2e3b8fe2fc37f2ccfb3fd9188a78
 
@@ -48,11 +48,10 @@ href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/
 as=html shadow=open ></fetch-for>
 ```
 
-What *be-hashing-out* does:
+What *be-hashing-out* does with the above markup, containing a non trivial be-hashing-out value:
 
-1.  Gets the outerHTML string of the element it adorns.
-2.  Removes the "be-hashing-out=63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228" part out of the string.
-3.  Calculates the digest.
-4.  Verifies that the value was registered, and the values match.
-5.  Sets property oFetchFor.beEnhanced.beHashingOut.isRegistered to true if the digests match, otherwise false.
-6.  If false, emits a console error again.
+1.  Forms a string from the attributes other than be-hashing-out of the element it adorns.
+2.  Calculates the digest.
+3.  Verifies that the value was registered, and the value matches the value of the be-hashing-out attribute.
+4.  Sets property oFetchFor.beEnhanced.beHashingOut.isRegistered to true if the digests match, otherwise false.
+5.  If false, emits a console error again.
