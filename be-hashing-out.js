@@ -35,9 +35,19 @@ class BeHashingOut extends BE {
      */
     async logHash(self) {
         const {enhancedElement} = self;
-        const outer = enhancedElement.outerHTML.replace('be-hashing-out=""', '');
+        const searchStr = 'be-hashing-out=""';
+        const outer = enhancedElement.outerHTML;
+        const outerWithoutSearchStr = outer.replace(searchStr, '');
         const digest = await this.digestMessage(outer);
-        console.log({outer, digest});
+        const suggestedHTML = outer.replace(searchStr, `be-hashing-out="${digest}"`);
+        console.error(String.raw `
+            <div>Suggested markup:</div>
+            <script type=module>
+                import {register} from 'be-hashing-out/register.js';
+                register('${digest}');
+            </script>
+            ${suggestedHTML}
+        `);
         return /** @type {PAP} */({
             resolved: true
         });

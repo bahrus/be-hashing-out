@@ -31,9 +31,9 @@ href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/
 as=html shadow=open ></fetch-for>
  ```
 
-What this does:  Since the value of the attribute is empty, it emits an error with the Crypto.subtle.digest value based on the outerHTML (excluding the be-hashing-out attribute) to the console.
+What this does:  Since the value of the attribute is empty, it emits an error with the SubtleCrypto.digest value based on the outerHTML (excluding the be-hashing-out attribute) to the console.
 
-In this case, say the value is:  63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228
+In this case, say the value is:  7f1a1863445afcd5051f89bbb92b5bfe580e2e3b8fe2fc37f2ccfb3fd9188a78
 
 ### Step 2
 
