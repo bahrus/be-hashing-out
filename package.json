@@ -1,11 +1,47 @@
 {
   "name": "be-hashing-out",
   "version": "0.0.0",
-  "description": ">  Enabling unfettered JavaScript unintentionally in the browser can be dangerous, as it allows XSS attacks.  Therefore, (in addition to performance and accessibility reasons), use less JavaScript, more HTML.  However, if the HTML contains any explicit JavaScript in the event handlers, you're back to square one since the browser won't support you with nonce/hash, and script tags can't identify where in the DOM it is.  So.... just give up and write the whole thing in JavaScript.",
-  "main": "behivior.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements"
+  ],
+  "description": "Elevate the trust level of HTML Fragments.",
+  "main": "be-hashing-out.js",
+  "module": "be-hashing-out.js",
+  "exports": {
+    ".": "./be-hashing-out.js",
+    "./be-hashing-out.js": "./be-hashing-out.js"
   },
-  "author": "",
-  "license": "MIT"
+  "files": [
+    "*.js",
+    "types.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahrus/be-hashing-out.git"
+  },
+  "dependencies": {
+    "be-enhanced": "0.0.144",
+    "be-exportable": "0.0.130",
+    "be-hive": "0.0.221",
+    "trans-render": "0.0.845"
+  },
+  "devDependencies": {
+    "may-it-serve": "0.0.8",
+    "@playwright/test": "1.47.2"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "serve": "node node_modules/may-it-serve/serve.js",
+    "safari": "npx playwright wk http://localhost:3030",
+    "update": "ncu -u && npm install"
+  },
+  "author": "Bruce B. Anderson <anderson.bruce.b@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bahrus/be-hashing-out/issues"
+  },
+  "homepage": "https://github.com/bahrus/be-hashing-out#readme"
 }
