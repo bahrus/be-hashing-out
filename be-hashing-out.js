@@ -33,13 +33,30 @@ class BeHashingOut extends BE {
      * 
      * @param {BAP} self 
      */
-    logHash(self) {
+    async logHash(self) {
         const {enhancedElement} = self;
-        const outer = enhancedElement.outerHTML;
-        console.log({outer});
+        const outer = enhancedElement.outerHTML.replace('be-hashing-out=""', '');
+        const digest = await this.digestMessage(outer);
+        console.log({outer, digest});
         return /** @type {PAP} */({
             resolved: true
         });
+    }
+
+    /**
+     * 
+     * @param {string} message 
+     * @returns {Promise<string>}
+     */
+    async digestMessage(message) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
+        const hashHex = hashArray
+            .map((b) => b.toString(16).padStart(2, "0"))
+            .join(""); // convert bytes to hex string
+        return hashHex;
     }
 }
 
