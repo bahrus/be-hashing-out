@@ -16,7 +16,13 @@ export const emc = {
             instanceOf: 'String',
             mapsTo: 'hash'
         }
-    }
+    },
+    importEnh: async () => {
+        const {BeHashingOut} = /** @type {{new(): IEnhancement<Element>}} */ 
+        /** @type {any} */
+        (await import('./be-hashing-out.js'));
+        return BeHashingOut;
+    },
 }
 
 const mose = seed(emc);
