@@ -1,4 +1,4 @@
-# be-hashing-out [TODO]
+# be-hashing-out
 
 Elevate the trust level of HTML Fragments.
 
@@ -53,5 +53,32 @@ What *be-hashing-out* does with the above markup, containing a non trivial be-ha
 1.  Forms a string from the attributes other than be-hashing-out of the element it adorns.
 2.  Calculates the digest.
 3.  Verifies that the value was registered, and the value matches the value of the be-hashing-out attribute.
-4.  Sets property oFetchFor.beEnhanced.beHashingOut.isRegistered to true if the digests match, otherwise false.
+4.  Sets property oFetchFor.beEnhanced.beHashingOut.resolved to true if the digests match, otherwise false.
 5.  If false, emits a console error again.
+
+## Viewing Locally
+
+Any web server that serves static files will do but...
+
+1.  Install git.
+2.  Fork/clone this repo.
+3.  Install node.
+4.  Open command window to folder where you cloned this repo.
+5.  > npm install
+6.  > npm run serve
+7.  Open http://localhost:3030/demo in a modern browser.
+
+## Importing in ES Modules:
+
+```JavaScript
+import 'be-hashing-out/be-hashing-out.js';
+
+```
+
+## Using from CDN:
+
+```html
+<script type=module crossorigin=anonymous>
+    import 'https://esm.run/be-hashing-out';
+</script>
+```
