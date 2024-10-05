@@ -53,6 +53,6 @@ What *be-hashing-out* does:
 1.  Gets the OuterHTML string of the element it adorns.
 2.  Removes the "be-hashing-out=63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228" part out of the string.
 3.  Calculates the digest.
-4.  Verifies that the value was registered.
-5.  Sets property oFetchFor.beHashingOut.isRegistered to true if the digests match, otherwise false.
+4.  Verifies that the value was registered, and the values match.
+5.  Sets property oFetchFor.beEnhanced.beHashingOut.isRegistered to true if the digests match, otherwise false.
 6.  If false, emits a console error again.
