@@ -5,3 +5,12 @@ import { Registry } from 'be-hive/Registry.js';
 /** @import {Actions, PAP,  AP} from './ts-refs/be-calculating/types' */;
 /** @import {CSSQuery} from './ts-refs/trans-render/types.js' */
 
+/**
+ * @type {Partial<EMC<any, AP>>}
+ */
+export const emc = {
+
+}
+
+const mose = seed(emc);
+MountObserver.synthesize(document, BeHive, mose);
