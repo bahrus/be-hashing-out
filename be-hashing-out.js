@@ -30,7 +30,8 @@ class BeHashingOut extends BE {
             checkDigest:{
                 ifAllOf: 'digest'
             }
-        }
+        },
+        positractions:[resolved, rejected]
 
     }
 
