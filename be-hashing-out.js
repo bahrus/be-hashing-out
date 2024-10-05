@@ -12,6 +12,7 @@ import { dispatchEvent as de } from 'trans-render/positractions/dispatchEvent.js
  * 
  */
 class BeHashingOut extends BE {
+
     de = de;
     /**
      * @type {BEConfig<BAP, Actions & IEnhancement, any>}
@@ -19,11 +20,14 @@ class BeHashingOut extends BE {
     static config = {
         propInfo: {
             ...propInfo,
-            hash: {}
+            digest: {}
         },
         actions: {
-            logHash: {
-                ifNoneOf: 'hash'
+            logDigest: {
+                ifNoneOf: 'digest'
+            },
+            checkDigest:{
+                ifAllOf: 'digest'
             }
         }
 
@@ -33,21 +37,38 @@ class BeHashingOut extends BE {
      * 
      * @param {BAP} self 
      */
-    async logHash(self) {
+    async logDigest(self) {
         const {enhancedElement} = self;
-        const searchStr = 'be-hashing-out=""';
-        const outer = enhancedElement.outerHTML;
-        const outerWithoutSearchStr = outer.replace(searchStr, '');
+        const searchStr = be_hashing_out + '"';
+        const outer = enhancedElement.outerHTML.replace(searchStr, '');
         const digest = await this.digestMessage(outer);
-        const suggestedHTML = outer.replace(searchStr, `be-hashing-out="${digest}"`);
+        const suggestedAttr = `${be_hashing_out}${digest}"`
         console.error(String.raw `
-            <div>Suggested markup:</div>
+            Suggested markup:
             <script type=module>
                 import {register} from 'be-hashing-out/register.js';
                 register('${digest}');
             </script>
-            ${suggestedHTML}
+            Suggested Attr:
+            ${suggestedAttr}
         `);
+        return /** @type {PAP} */({
+            rejected: true
+        });
+    }
+
+    /**
+     * 
+     * @param {BAP} self 
+     */
+    async checkDigest(self) {
+        const {enhancedElement} = self;
+        const outer = enhancedElement.outerHTML;
+        const iBefore = outer.indexOf(be_hashing_out);
+        const iStart = iBefore + len;
+        const iEnd = outer.indexOf('"', iStart) + 1;
+        const outerWithout = outer.substring(0, iBefore) + outer.substring(iEnd);
+        console.log({iStart, iEnd, outerWithout});
         return /** @type {PAP} */({
             resolved: true
         });
@@ -68,7 +89,12 @@ class BeHashingOut extends BE {
             .join(""); // convert bytes to hex string
         return hashHex;
     }
+
+
 }
+
+const be_hashing_out = 'be-hashing-out="';
+const len = be_hashing_out.length;
 
 await BeHashingOut.bootUp();
 export {BeHashingOut};

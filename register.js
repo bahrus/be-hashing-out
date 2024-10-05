@@ -14,6 +14,6 @@ export function register(hash){
             registry.add(aHash)
         }
     }else{
-        registry.add(aHash);
+        registry.add(hash);
     }
 }

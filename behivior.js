@@ -14,7 +14,7 @@ export const emc = {
     map: {
         '0.0': {
             instanceOf: 'String',
-            mapsTo: 'hash'
+            mapsTo: 'digest'
         }
     },
     importEnh: async () => {

@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>No Hash</title>
+    <title>No Digest</title>
     <script type=importmap >
         {
             "imports": {
+                "be-hashing-out/": "/",
                 "be-enhanced/": "/node_modules/be-enhanced/",
                 "be-hive/":  "/node_modules/be-hive/",
                 "mount-observer/": "/node_modules/mount-observer/",
@@ -16,7 +17,11 @@
     </script>
 </head>
 <body>
-    <fetch-for be-hashing-out
+    <script type=module>
+        import {register} from 'be-hashing-out/register.js';
+        register('f67946988efc6493ff3b0bd6c8eab6d65adedf62a2caed04889f49dbad792d6b');
+    </script>
+    <fetch-for be-hashing-out="f67946988efc6493ff3b0bd6c8eab6d65adedf62a2caed04889f49dbad792d6b"
     href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/ 
     as=html shadow=open></fetch-for>
     <script type=module>
