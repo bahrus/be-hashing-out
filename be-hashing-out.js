@@ -1,6 +1,7 @@
 // @ts-check
 import { BE } from 'be-enhanced/BE.js';
 import { propInfo, rejected, resolved } from 'be-enhanced/cc.js';
+import { registry } from './register.js';
 /** @import {BEConfig, IEnhancement, BEAllProps} from './ts-refs/be-enhanced/types.d.ts' */
 /** @import {Actions, PAP,  AP, BAP} from './ts-refs/be-hashing-out/types' */;
 
@@ -41,6 +42,7 @@ class BeHashingOut extends BE {
         const {enhancedElement} = self;
         const searchStr = be_hashing_out + '"';
         const outer = enhancedElement.outerHTML.replace(searchStr, '');
+        console.log(outer);
         const digest = await this.digestMessage(outer);
         const suggestedAttr = `${be_hashing_out}${digest}"`
         console.error(String.raw `
@@ -62,13 +64,17 @@ class BeHashingOut extends BE {
      * @param {BAP} self 
      */
     async checkDigest(self) {
-        const {enhancedElement} = self;
-        const outer = enhancedElement.outerHTML;
-        const iBefore = outer.indexOf(be_hashing_out);
-        const iStart = iBefore + len;
-        const iEnd = outer.indexOf('"', iStart) + 1;
-        const outerWithout = outer.substring(0, iBefore) + outer.substring(iEnd);
-        console.log({iStart, iEnd, outerWithout});
+        const {enhancedElement, digest} = self;
+        const outer = enhancedElement.outerHTML.replace(be_hashing_out + digest + '"', "");
+        console.log({outer});
+        const digest2 = await this.digestMessage(outer);
+        if(digest !== digest2 || !registry.has(digest)){
+            console.error(`${digest}!==${digest2}`);
+            return /** @type {PAP} */({
+                rejected: true
+            });
+        }
+        
         return /** @type {PAP} */({
             resolved: true
         });
