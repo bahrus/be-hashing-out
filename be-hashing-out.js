@@ -80,6 +80,26 @@ class BeHashingOut extends BE {
 
     /**
      * 
+     * @param {Array<string>} attrs 
+     * 
+     */
+    confirm(attrs){
+        const self = /** @type {BAP} */ this;
+        const {enhancedElement} = self;
+        const lastChecked = this.#attrsWhenLastChecked;
+        if(lastChecked === undefined){
+            return attrs.length === 0;
+        }
+        for(const attr of attrs){
+            if(enhancedElement.getAttribute(attr) !== lastChecked[attr]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 
      * @param {BAP} self 
      */
     async checkDigest(self) {
