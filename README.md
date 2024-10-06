@@ -37,7 +37,7 @@ The console looks like:
 
 > Suggested markup:
 
-```hrml
+```html
 <script type=module>
     import {register} from 'be-hashing-out/register.js';
     register('d61df4e4896765173a31dd0685866f0106c9b2b803f00096140d46e2e0dadc4f');
@@ -49,24 +49,31 @@ The console looks like:
 
 ### Step 2
 
+Based on what is seen in the console, update the markup:
+
 ```html
 <script type=module>
     import {register} from 'be-hashing-out/register.js';
-    register('63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228');
+    register('d61df4e4896765173a31dd0685866f0106c9b2b803f00096140d46e2e0dadc4f');
 </script>
 
-<fetch-for be-hashing-out=63c93d6c1dbef1929c0320ef1c4396cce1e0485ec743fe877b12e35a66b9f228
+<fetch-for be-hashing-out=d61df4e4896765173a31dd0685866f0106c9b2b803f00096140d46e2e0dadc4f
 href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/ 
 as=html shadow=open ></fetch-for>
 ```
 
-What *be-hashing-out* does with the above markup, containing a non trivial be-hashing-out value:
+What *be-hashing-out* does with the above markup, now that it contains a non trivial be-hashing-out value:
 
-1.  Forms a string from the attributes other than be-hashing-out of the element it adorns.
-2.  Calculates the digest.
+1.  Forms a string from the attributes other than be-hashing-out of the element it adorns just like before.
+2.  Calculates the digest just like before.
 3.  Verifies that the value was registered, and the value matches the value of the be-hashing-out attribute.
-4.  Sets property oFetchFor.beEnhanced.beHashingOut.resolved to true if the digests match, otherwise false.
-5.  If false, emits a console error again.
+4.  If every matches, sets properties:
+    1.  oFetchFor.beEnhanced.beHashingOut.resolved to true.
+    2.  oFetchFor.beEnhanced.beHashingOut.rejected to false.
+5.  If the values don't match, or the value isn't registered,  sets properties:
+    1.  oFetchFor.beEnhanced.beHashingOut.rejected to true.
+    2.  oFetchFor.beEnhanced.beHashingOut.resolved to false.
+5.  If either case, two events with types "resolved" and "rejected" are dispatched.
 
 ## Viewing Locally
 
