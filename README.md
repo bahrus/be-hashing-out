@@ -77,9 +77,9 @@ What *be-hashing-out* does with the above markup, now that it contains a non tri
 
 ## Who cares?
 
-This enhancement doesn't do much by itself.  It is quietly provide information that it thinks will be useful to others.  And "who" are those others that would find this information useful?
+This enhancement doesn't do much by itself.  It is quietly providing information that it thinks will be useful to others.  And "who" are those others that would find this information useful?
 
-At least two third parties would find it useful to now.
+At least two third parties would find it useful for now.
 
 1.  Custom Elements that support attributes that could allow for XSS attacks from untrusted third-party (or user supplied) HTML
 2.  Custom Enhancements that similarly support such attributes.
