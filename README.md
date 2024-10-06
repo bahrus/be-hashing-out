@@ -91,8 +91,16 @@ So what these custom elements / enhancements can do is:
 ```JavaScript
 const {emc} = await import('be-hashing-out/emc.js');
 const beHashingOut = oFetchFor.beEnhanced.whenResolved(emc);
+let everyIsOkay = false;
 if(beHashingOut.resolved){
-    const {} = await import(')
+    //for  custom elements do this
+    if(beHashingOut.confirm(FetchFor.observedAttributes)){
+        everyIsOkay = true;
+    }
+    //for custom enhancements to this
+    if(beHashingOut.confirm(/** tbd **/)){
+        everyIsOkay = true;
+    }
 }
 ```
 
