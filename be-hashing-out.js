@@ -54,9 +54,14 @@ class BeHashingOut extends BE {
             ${suggestedAttr}
         `);
         return /** @type {PAP} */({
-            rejected: true
+            rejected: true,
+            resolved: false,
         });
     }
+    /**
+     * @type {{[key: string]: string} | undefined}
+     */
+    #attrsWhenLastChecked;
     /**
      * 
      * @param {NamedNodeMap} attrs 
@@ -64,8 +69,10 @@ class BeHashingOut extends BE {
     #getVals(attrs){
         /** @type {Array<string>} */
         const vals = [];
+        this.#attrsWhenLastChecked = {};
         for(const attr of attrs){
             if(attr.name === 'be-hashing-out') continue;
+            this.#attrsWhenLastChecked[attr.name] = attr.value;
             vals.push(`${attr.name}=${attr.value}`);
         }
         return vals.join(',');
@@ -82,12 +89,14 @@ class BeHashingOut extends BE {
         if(digest !== digest2 || !registry.has(digest)){
             console.error(`${digest}!==${digest2}`);
             return /** @type {PAP} */({
-                rejected: true
+                rejected: true,
+                resolved: false,
             });
         }
         
         return /** @type {PAP} */({
-            resolved: true
+            resolved: true,
+            rejected: false,
         });
     }
 
