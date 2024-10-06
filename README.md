@@ -31,9 +31,21 @@ href=https://cors-anywhere.herokuapp.com/https://www.theonion.com/
 as=html shadow=open ></fetch-for>
  ```
 
-What this does:  Since the value of the attribute is empty, it emits an error with the SubtleCrypto.digest value based on the attribute values (excluding the be-hashing-out attribute) to the console.
+What the *be-hashing-out* enhancement does:  Since the value of the *be-hashing-out* attribute is empty, it emits a console.error with the expected SubtleCrypto.digest value, based on the attribute values (excluding the be-hashing-out attribute itself).
 
-In this case, say the value is:  7f1a1863445afcd5051f89bbb92b5bfe580e2e3b8fe2fc37f2ccfb3fd9188a78
+The console looks like:
+
+> Suggested markup:
+
+```hrml
+<script type=module>
+    import {register} from 'be-hashing-out/register.js';
+    register('d61df4e4896765173a31dd0685866f0106c9b2b803f00096140d46e2e0dadc4f');
+</script>
+```
+
+> Suggested Attr:
+> be-hashing-out="d61df4e4896765173a31dd0685866f0106c9b2b803f00096140d46e2e0dadc4f"
 
 ### Step 2
 
