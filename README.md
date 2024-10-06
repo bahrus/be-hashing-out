@@ -67,13 +67,34 @@ What *be-hashing-out* does with the above markup, now that it contains a non tri
 1.  Forms a string from the attributes other than be-hashing-out of the element it adorns just like before.
 2.  Calculates the digest just like before.
 3.  Verifies that the value was registered, and the value matches the value of the be-hashing-out attribute.
-4.  If every matches, sets properties:
+4.  If everything is in order, sets properties:
     1.  oFetchFor.beEnhanced.beHashingOut.resolved to true.
     2.  oFetchFor.beEnhanced.beHashingOut.rejected to false.
 5.  If the values don't match, or the value isn't registered,  sets properties:
     1.  oFetchFor.beEnhanced.beHashingOut.rejected to true.
     2.  oFetchFor.beEnhanced.beHashingOut.resolved to false.
-5.  If either case, two events with types "resolved" and "rejected" are dispatched.
+6.  If either case, two events with types "resolved" and "rejected" are dispatched.
+
+## Who cares?
+
+This enhancement doesn't do much by itself.  It is quietly provide information that it thinks will be useful to others.  And "who" are those others that would find this information useful?
+
+At least two third parties would find it useful to now.
+
+1.  Custom Elements that support attributes that could allow for XSS attacks from untrusted third-party (or user supplied) HTML
+2.  Custom Enhancements that similarly support such attributes.
+
+So what these custom elements / enhancements can do is:
+
+1.  Attach this *be-hashing-out* enhancement (if not already attached -- which the be-enhanced functionality already accounts for):
+
+```JavaScript
+const {emc} = await import('be-hashing-out/emc.js');
+const beHashingOut = oFetchFor.beEnhanced.whenResolved(emc);
+if(beHashingOut.resolved){
+    const {} = await import(')
+}
+```
 
 ## Viewing Locally
 
